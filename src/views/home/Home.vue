@@ -68,7 +68,9 @@ const query = async () => {
     let requestArray = [];
     //获取各模型运算数据
     for(const model of modelList.value) { 
-        requestArray.push(await post(`/api/${model}/point`, {
+        // https://stellerus-te-ktmmanmwnm.cn-hongkong.fcapp.run/
+        // `/api/${model}/point`
+        requestArray.push(await post(`https://stellerus-te-ktmmanmwnm.cn-hongkong.fcapp.run/api/${model}/point`, {
             lon: xPosition.value,
             lat: yPosition.value,
             setting: { utc: 8 },
