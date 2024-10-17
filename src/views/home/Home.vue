@@ -157,10 +157,10 @@ const getModels = async () => {
             <h2>Meteorological Elements</h2>
             <el-radio-group v-model="radio">
                 <el-radio-button label="Temperature" value="t2m@C" />
-                <el-radio-button label="Wind speed" value="ws10m" />
+                <el-radio-button label="Wind Speed" value="ws10m" />
                 <el-radio-button label="Irradiation" value="dswrf" />
                 <el-radio-button label="Rainfall" value="tp" />
-                <el-radio-button label="Air humidity" value="rh@%" />
+                <el-radio-button label="Air Humidity" value="rh@%" />
             </el-radio-group>
 
             <h2>Meteorological Models</h2>
