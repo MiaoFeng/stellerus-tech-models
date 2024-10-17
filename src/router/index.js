@@ -15,6 +15,7 @@ const routes = [
 ]
 
 export default createRouter({
-history: createWebHistory(),
+  //确定basename， Basename用于在部署应用时，当应用不是部署在域名的根路径下，而是部署在子路径时，Vue Router能够正确地进行路由
+history: createWebHistory("/stellerus-tech-models"),
 routes,
 })
