@@ -68,7 +68,7 @@ const query = async () => {
     let requestArray = [];
     //获取各模型运算数据
     for(const model of modelList.value) { 
-        requestArray.push(await post(`/api/${model}/point`, {
+        requestArray.push(await post(`https://api-free-openet.terraqt.com/v1/${model}/point`, {
             lon: xPosition.value,
             lat: yPosition.value,
             setting: { utc: 8 },
@@ -154,11 +154,11 @@ const getModels = async () => {
             </div>
             <h2>Meteorological Elements</h2>
             <el-radio-group v-model="radio">
-                <el-radio-button label="温度" value="t2m@C" />
-                <el-radio-button label="风速" value="ws10m" />
-                <el-radio-button label="辐照" value="dswrf" />
-                <el-radio-button label="降水" value="tp" />
-                <el-radio-button label="空气湿度" value="rh@%" />
+                <el-radio-button label="Temperature" value="t2m@C" />
+                <el-radio-button label="Wind speed" value="ws10m" />
+                <el-radio-button label="Irradiation" value="dswrf" />
+                <el-radio-button label="Rainfall" value="tp" />
+                <el-radio-button label="Air humidity" value="rh@%" />
             </el-radio-group>
 
             <h2>Meteorological Models</h2>
