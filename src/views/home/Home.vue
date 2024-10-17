@@ -70,7 +70,7 @@ const query = async () => {
     for(const model of modelList.value) { 
         // https://stellerus-te-ktmmanmwnm.cn-hongkong.fcapp.run/
         // `/api/${model}/point`
-        requestArray.push(await post(`https://stellerus-te-ktmmanmwnm.cn-hongkong.fcapp.run/api/${model}/point`, {
+        requestArray.push(await post(`/api/${model}/point`, {
             lon: xPosition.value,
             lat: yPosition.value,
             setting: { utc: 8 },
