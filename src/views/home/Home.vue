@@ -121,7 +121,7 @@ const getModels = async () => {
 
 <template>
   <div>
-    <div class="title">查找任意时间地点的温度/风速/辐照/降雨等数据</div>
+    <div class="title">Find temperature/wind speed/irradiation/rainfall data at any time and place</div>
     <div class="content">
         <div class="map-page-container">
             <el-amap
@@ -146,13 +146,13 @@ const getModels = async () => {
                 <el-date-picker
                     v-model="date"
                     type="date"
-                    placeholder="请选择日期"
+                    placeholder="Choose Date"
                     value-format="YYYY-MM-DD"
                     style="margin-left: 16px"
                 />
-                <el-button type="primary" @click="query" class="query-button">查询</el-button>
+                <el-button type="primary" @click="query" class="query-button">Search</el-button>
             </div>
-            <h2>气象要素</h2>
+            <h2>Meteorological Elements</h2>
             <el-radio-group v-model="radio">
                 <el-radio-button label="温度" value="t2m@C" />
                 <el-radio-button label="风速" value="ws10m" />
@@ -161,7 +161,7 @@ const getModels = async () => {
                 <el-radio-button label="空气湿度" value="rh@%" />
             </el-radio-group>
 
-            <h2>气象模型</h2>
+            <h2>Meteorological Models</h2>
             <el-checkbox-group v-model="modelList">
                 <el-checkbox
                     v-for="item in modelOptions"

@@ -6,7 +6,7 @@
     <div 
         class="main-container"
     >
-        <div>星睿云智</div>
+        <div>Stellerus-Tech</div>
     </div>
 </template>
 

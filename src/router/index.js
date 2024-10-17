@@ -3,7 +3,7 @@ import Layout from '@/layout/index.vue'
 import Home from '@/views/home/Home.vue'
 const routes = [
   {
-    path: '/',
+    path: '/index',
     component: Home,
     children: [{ path: '', component: Home }],
   },
