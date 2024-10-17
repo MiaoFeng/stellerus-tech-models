@@ -10,7 +10,10 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  // base: '/static/',
+  build: {
+    outDir:'./docs'
+    },
+  base: './',
   server: {
     host: '0.0.0.0',
     proxy: {     
