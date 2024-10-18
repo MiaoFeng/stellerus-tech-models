@@ -24,8 +24,8 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v2
         with:
-          ref: gh-pages  #固定名字
-          path: gh-pages
+          ref: main
+          path: main
  
       - name: Modify index.html and add 404.html
         run: |
@@ -52,7 +52,7 @@ jobs:
           # git add index.html 404.html CNAME
           git add index.html 404.html
           git commit -m "Update index.html and add 404.html"
-          git push origin gh-pages
+          git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
  
