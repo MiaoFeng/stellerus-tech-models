@@ -49,6 +49,11 @@ onBeforeMount(() => {
   getModels();
 })
 
+const showSatellite = ref(false);
+const switchShowSatellite = () => {
+    showSatellite.value = !showSatellite.value;
+}
+
 const clickMap = (e) => {
   const { lng, lat } = e.lnglat;
   xPosition.value = lng;
@@ -130,7 +135,14 @@ const getModels = async () => {
                 :center="center"
                 :zoom="18"
                 @click="clickMap"
-            />
+            >
+                <el-amap-layer-satellite :visible="showSatellite" />
+            </el-amap>
+        </div>
+        <div class="map-toolbar">
+            <el-button class="switch-button" @click="switchShowSatellite()">
+            {{ showSatellite? 'Map' : 'Satellite' }}
+            </el-button>
         </div>
         <el-space direction="vertical" alignment="start" :size="16">
             <div class="position-row">
@@ -185,8 +197,19 @@ const getModels = async () => {
 .map-page-container {
     height: 500px;
     width: 100%;
-    margin-bottom: 16px;
 }
+
+.map-toolbar {
+    background: lightgray;
+    width: 100%;
+    height: 48px;
+    margin-bottom: 16px;
+    padding: 8px 16px;
+    .switch-button {
+        width: 80px;
+    }
+}
+
 .title {
     background: #f3f6f8;
     background-image: none;
@@ -205,5 +228,13 @@ const getModels = async () => {
 }
 .query-button {
     width: 120px;
+}
+//隐藏高德地图文字和logo
+::v-deep .amap-logo {
+  display: none;
+  opacity: 0 !important;
+}
+::v-deep .amap-copyright {
+  opacity: 0;
 }
 </style>

@@ -10,6 +10,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  //本地打包然后放到github部署的配置
   build: {
     outDir:'./docs'
     },
