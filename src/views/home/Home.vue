@@ -71,7 +71,7 @@ const query = async () => {
     }
 
     let requestArray = [];
-    //获取各模型运算数据
+    //获取各模型运算结果数据
     for(const model of modelList.value) { 
         // https://stellerus-te-ktmmanmwnm.cn-hongkong.fcapp.run/
         // `/api/${model}/point`
