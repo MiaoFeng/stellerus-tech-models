@@ -19,7 +19,8 @@ import MiddleLayout from './Main.vue';
 
 <style scoped>
 .common-header {
-    background: #f3f6f8;
+    background: black;
+    color: #E91E63;
     background-image: none;
 }
 

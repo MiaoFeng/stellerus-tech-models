@@ -4,6 +4,7 @@ import { get, post } from '@/apis/index.js';
 import { ElMessage } from 'element-plus';
 import {ElAmap, useGeolocation ,lazyAMapApiLoaderInstance} from "@vuemap/vue-amap";
 import MultiLineChart from '@/components/MultiLineChart.vue';
+import WeatherImg from '@/assets/image/weather.png';
 
 const center = ref(null);
 const radio = ref('t2m@C');
@@ -128,7 +129,16 @@ const getModels = async () => {
 
 <template>
   <div>
-    <div class="title">Find temperature/wind speed/irradiation/rainfall data at any time and place</div>
+    <div class="description">
+        <div class="detail-wrapper">
+            <div class="detail">
+                <div>Collect meteorological information</div>
+                <div>Scientific analysis and forecast</div>
+                <div>Serve multiple industries</div>
+            </div>
+            <div class="weather-img"></div>
+        </div>
+    </div>
     <div class="content">
         <div class="map-page-container">
             <el-amap
@@ -192,7 +202,7 @@ const getModels = async () => {
 
 <style scoped lang="scss">
 .content {
-    padding: 16px 64px;
+    padding: 24px 120px;
 }
 .map-page-container {
     height: 500px;
@@ -210,12 +220,30 @@ const getModels = async () => {
     }
 }
 
-.title {
-    background: #f3f6f8;
-    background-image: none;
-    font-size: 28px;
-    text-align: center;
-    padding: 16px;
+.description {
+    padding: 0px 120px;
+    .detail-wrapper {
+        background: #f3f6f8;
+        background-image: none;
+        font-size: 28px;
+        font-weight: bold;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .detail {
+            width: calc(100% - 540px);
+            div {
+                margin-bottom: 24px;
+            }
+        }
+        .weather-img {
+            width: 540px;
+            height:360px;
+            background-image: url("@/assets/image/weather.png");
+            background-size: cover;
+        }
+    }
 }
 .position-row {
     display: flex;
