@@ -54,7 +54,7 @@ tooltip:{
     boundaryGap: false,
     axisLine: {
       lineStyle: {
-        color: '#7EA8AE'
+        color: "rgb(121.3, 187.1, 255)"
       }
     },
     axisLabel: {
@@ -74,6 +74,9 @@ tooltip:{
     type: 'value',
     name: '',
     axisLine: {
+      lineStyle: {
+        color: "rgb(121.3, 187.1, 255)"
+      },
       show: true
     },
     splitArea: {

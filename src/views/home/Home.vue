@@ -13,7 +13,9 @@ const yPosition = ref('');
 const date = ref(new Date().toLocaleDateString('en-CA'))
 const modelList = ref([]);
 const modelOptions = ref([]);
+const showChart = ref(false);
 const chartData = ref({data: []});
+const chart =ref(null);
 const unitMapping = {
     't2m@C': '℃',
     't2m@F': '℉',
@@ -71,7 +73,10 @@ const query = async () => {
         return 
     }
 
+    showChart.value = true;
+
     let requestArray = [];
+    // if(chart)chart.value.showLoading();
     //获取各模型运算结果数据
     for(const model of modelList.value) { 
         // https://stellerus-te-ktmmanmwnm.cn-hongkong.fcapp.run/
@@ -85,7 +90,7 @@ const query = async () => {
         }))
     }
     const res = await Promise.all(requestArray);
-    console.log('res: ', res)
+    // if(chart) chart.value.hideLoading();
     if(res.length === 0) return;
     let chart = {
         data: []
@@ -131,12 +136,19 @@ const getModels = async () => {
   <div>
     <div class="description">
         <div class="detail-wrapper">
-            <div class="detail">
+            <!-- <div class="detail">
                 <div>Collect meteorological information</div>
                 <div>Scientific analysis and forecast</div>
                 <div>Serve multiple industries</div>
             </div>
-            <div class="weather-img"></div>
+            <div class="weather-img"></div> -->
+            <div class="weather-img">
+                <div class="detail">
+                    <div>Collect meteorological information</div>
+                    <div>Scientific analysis and forecast</div>
+                    <div>Serve multiple industries</div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="content">
@@ -195,7 +207,8 @@ const getModels = async () => {
                 />
             </el-checkbox-group>
         </el-space>
-        <MultiLineChart :data="chartData" :unit="unitMapping[radio.value]" />      
+        <el-empty v-if="!showChart" description="Please select position and models" />
+        <MultiLineChart v-else :data="chartData" ref="chart" :unit="unitMapping[radio.value]" />      
     </div>
   </div>
 </template>
@@ -225,21 +238,22 @@ const getModels = async () => {
     .detail-wrapper {
         background: #f3f6f8;
         background-image: none;
-        font-size: 28px;
+        font-size: 30px;
         font-weight: bold;
         text-align: center;
         display: flex;
         align-items: center;
         justify-content: space-between;
         .detail {
-            width: calc(100% - 540px);
+            color: white;
+            padding-top: 240px;
             div {
-                margin-bottom: 24px;
+                margin-bottom: 40px;
             }
         }
         .weather-img {
-            width: 540px;
-            height:360px;
+            width: 100%;
+            height: 664px;
             background-image: url("@/assets/image/weather.png");
             background-size: cover;
         }
