@@ -1,14 +1,41 @@
 <script setup lang="ts">
+import { ElMenu } from 'element-plus';
+import { ref } from 'vue';
+
+const activeIndex = ref('2')
+
+const handleSelect = (key: string, keyPath: string[]) => {
+    
+}
 
 </script>
 
 <template>
-    <div 
-        class="main-container"
+    <el-menu
+        :default-active="activeIndex"
+        class="el-menu-demo"
+        mode="horizontal"
+        :ellipsis="false"
+        @select="handleSelect"
     >
-        <h1>Stellerus-Tech</h1>
-        <h4>Accurate ClimaTech Lead</h4>
-    </div>
+        <el-menu-item class="logo" index="0" disabled>
+            <img
+                style="width: 90px"
+                src="../assets/image/stellerus.jpg"
+                alt="Stellerus-Tech"
+            />
+            <span style="font-size: 20px">Stellerus</span>
+            <!-- <span>Accurate ClimaTech Lead</span> -->
+        </el-menu-item>
+        <el-menu-item index="1" class="slogan">Accurate ClimaTech Lead</el-menu-item>
+        <!-- <el-menu-item index="1">Map</el-menu-item> -->
+        <!-- <el-sub-menu index="2">
+        <template #title>Workspace</template>
+        <el-menu-item index="2-1">item one</el-menu-item>
+        <el-menu-item index="2-2">item two</el-menu-item>
+        <el-menu-item index="2-3">item three</el-menu-item> 
+        </el-sub-menu> -->        
+    </el-menu>
 </template>
 
 <style lang="scss" scoped>
@@ -17,5 +44,17 @@
     display: flex;
     justify-content: space-between;
     align-items: end;
+}
+.el-menu--horizontal > .el-menu-item:nth-child(1) {
+  margin-right: auto;
+}
+.el-menu--horizontal > .el-menu-item.logo {
+  color: black;
+}
+.el-menu-item.logo.is-disabled{
+    opacity: 1;
+}
+.el-menu-item.slogan.is-disabled{
+    opacity: 1;
 }
 </style>

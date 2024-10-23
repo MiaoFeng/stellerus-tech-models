@@ -1,6 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Layout from '@/layout/index.vue'
 import Home from '@/views/home/Home.vue'
+import LeafLet from '../views/LeafLet.vue'
+import TerriaMap from '../views/TerriaMap.vue'
+import Mapbox from '../views/Mapbox.vue'
+
 const routes = [
   {
     path: '/index',
@@ -11,6 +15,21 @@ const routes = [
     path: '/home',
     component: Home,
     children: [{ path: '', component: Home }],
+  },
+  {
+    path: '/terriaMap',
+    component: TerriaMap,
+    children: [{ path: '', component: TerriaMap }],
+  },
+  {
+    path: '/mapbox',
+    component: Mapbox,
+    children: [{ path: '', component: Mapbox }],
+  },
+  {
+    path: '/leaflet',
+    component: LeafLet,
+    children: [{ path: '', component: LeafLet }],
   },
 ]
 
