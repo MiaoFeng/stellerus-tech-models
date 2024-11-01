@@ -39,7 +39,7 @@ import MiddleLayout from './Main.vue';
     flex: 1;
     flex-basis: auto;
     overflow: auto;
-    padding: var(--el-main-padding);
+    /* padding: var(--el-main-padding); */
 }
 
 .common-footer {

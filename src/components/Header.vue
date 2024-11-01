@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ElMenu } from 'element-plus';
+import { ElMenu, ElButton } from 'element-plus';
+import { User, Edit } from '@element-plus/icons-vue'
 import { ref } from 'vue';
 
 const activeIndex = ref('2')
@@ -27,7 +28,7 @@ const handleSelect = (key: string, keyPath: string[]) => {
             <span style="font-size: 20px">Stellerus</span>
             <!-- <span>Accurate ClimaTech Lead</span> -->
         </el-menu-item>
-        <el-menu-item index="1" class="slogan">Accurate ClimaTech Lead</el-menu-item>
+        <el-menu-item index="1" class="slogan"><el-button type="primary" :icon="User" circle /></el-menu-item>
         <!-- <el-menu-item index="1">Map</el-menu-item> -->
         <!-- <el-sub-menu index="2">
         <template #title>Workspace</template>
@@ -53,6 +54,9 @@ const handleSelect = (key: string, keyPath: string[]) => {
 }
 .el-menu-item.logo.is-disabled{
     opacity: 1;
+}
+:deep(.el-menu-item.slogan button .el-icon){
+    margin-right: 0px;
 }
 .el-menu-item.slogan.is-disabled{
     opacity: 1;

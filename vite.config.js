@@ -19,11 +19,19 @@ export default defineConfig({
     host: '0.0.0.0',
     proxy: {     
       '/api': {
-        target: 'http://localhost:9000',
+        target: 'http://localhost:8000',
         changeOrigin: true,
       },
       '/v1': {
         target: 'https://api-free-openet.terraqt.com',
+        changeOrigin: true,
+      },
+      'https://github.com': {
+        target: 'https://github.com',
+        changeOrigin: true,
+      },
+      'https://gibs.earthdata.nasa.gov': {
+        target: 'https://gibs.earthdata.nasa.gov',
         changeOrigin: true,
       }
     }

@@ -17,6 +17,10 @@ const props = defineProps({
           }
         }
     },
+    height: {
+      type: String,
+      default: '400px'
+    },
     unit: {
         type: String,
         default: ''
@@ -110,7 +114,7 @@ watch(() => props.data, (newVal) => {
 </script>
 
 <template>
-    <div>
+    <div style="width: 100%" :style="{ 'height': height }">
         <v-chart 
             :option="chartOptions"
             ref="chartInstance" 
@@ -122,6 +126,6 @@ watch(() => props.data, (newVal) => {
 <style lang="scss" scoped>
 .chart {
     width: 100%;
-    height: 400px;
+    height: 100%;
 }
 </style>
