@@ -18,14 +18,14 @@
                     <div class="tab-content wt-320">
                         <h4>Carbon Source</h4>
                         <div class="content-section">
-                            <el-switch v-model="junShanSwitch1" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, sliderValueJunShan, 'junshan', 'tiff-junshan', filesJunShan)" />
+                            <el-switch v-model="junShanSwitch1" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'junshan-layer', 'junshan-source', timeJunShan[sliderValueJunShan], timerJunShan)" />
                             <span style="font-size: 12px; margin-left: 8px; color: #555">Junshan AGB biomass</span>
                             <p class="description">Monitoring data of wild terrestrial animals on Junshan Island, Yueyang, Hunan。</p>
                             <div class="slider-demo-block">
                                 <el-button-group class="ml-4" size="small">
-                                    <el-button :disabled="!junShanSwitch1" :icon="isPlayJunShan ? VideoPause : VideoPlay" @click="(e) => handleVideoPlay('sliderValueJunShan', 'junshan', 'tiff-junshan', filesJunShan, 'isPlayJunShan', 'timerJunShan', 2000)" />
+                                    <el-button :disabled="!junShanSwitch1" :icon="isPlayJunShan ? VideoPause : VideoPlay" @click="(e) => handleVideoPlay(sliderValueJunShan, 'junshan-source', 'junshan-layer', timeJunShan[sliderValueJunShan], isPlayJunShan, timerJunShan, 2000)" />
                                 </el-button-group>
-                                <el-slider :disabled="!junShanSwitch1" v-model="sliderValueJunShan" :max="sliderMaxJunShan" @change="(e) => handleSliderChange(sliderValueJunShan, 'junshan', 'tiff-junshan', filesJunShan)"/>
+                                <el-slider :disabled="!junShanSwitch1" v-model="sliderValueJunShan" :max="sliderMaxJunShan" @change="(e) => handleSliderChange(sliderValueJunShan, 'junshan-source', 'junshan-layer', timeJunShan)" />
                             </div>
                         </div>
                         <el-space />
@@ -46,7 +46,7 @@
                     <div class="tab-content wt-320">
                         <h4>Wildfire Monitoring</h4>
                         <div class="content-section">
-                            <el-switch v-model="wildfireSwitch" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleWildfireSwitchChange(e)" />
+                            <el-switch v-model="wildfireSwitch" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'wildfire-layer', 'wildfire-source')" />
                             <span style="font-size: 12px; margin-left: 8px; color: #555">Global wildfire risk forecast</span>      
                         </div>
                     </div>                                   
@@ -61,14 +61,14 @@
                     <div class="tab-content wt-320">
                         <h4>HongKong</h4>
                         <div class="content-section">
-                            <el-switch v-model="oceanSwitch1" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'wind', 'tiff-wind')" />
+                            <el-switch v-model="oceanSwitch1" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'sphk-layer', 'sphk-source', timeSPHK[sliderValueSPHK], timerSPHK)" />
                             <span style="font-size: 12px; margin-left: 8px; color: #555">Suspended particles in water</span>
                             <p class="description">One of the indicators to measure water pollution.</p>
                             <div class="slider-demo-block">
                                 <el-button-group class="ml-4" size="small">
-                                    <el-button :disabled="!oceanSwitch1" :icon="isPlay ? VideoPause : VideoPlay" @click="(e) => handleVideoPlay('wind', 'tiff-wind')" />
+                                    <el-button :disabled="!oceanSwitch1" :icon="isPlay ? VideoPause : VideoPlay" @click="(e) => handleVideoPlay(sliderValueSPHK, 'sphk-source', 'sphk-layer', timeSPHK[sliderValueSPHK], isPlaySPHK, timerSPHK, 2000)" />
                                 </el-button-group>
-                                <el-slider :disabled="!oceanSwitch1" v-model="sliderValueSPHK" :max="sliderMax" @change="(e) => handleSliderChange('wind', 'tiff-wind')"/>
+                                <el-slider :disabled="!oceanSwitch1" v-model="sliderValueSPHK" :max="sliderMax" @change="(e) => handleSliderChange(sliderValueSPHK, 'sphk-source', 'sphk-layer', timeSPHK[sliderValueSPHK])"/>
                             </div>
                         </div>                      
                     </div>                   
@@ -130,14 +130,14 @@
                         <MultiLineChart v-else :data="chartData" ref="chart" height="300px"/>
                         <h4>Time Series Data</h4>
                         <div class="content-section" style="margin-top: 8px">
-                            <el-switch v-model="windSwitch1" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, sliderValueWind, 'wind', 'tiff-wind', filesWind, 5)" />
+                            <el-switch v-model="windSwitch1" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'wind-layer', 'wind-source', timeWind[sliderValueWind])" />
                             <span style="font-size: 12px; margin-left: 8px; color: #555">Wind Speed</span>
                             <p class="description">Show the wind speed with time series data.</p>
                             <div class="slider-demo-block">
                                 <el-button-group class="ml-4" size="small">
-                                    <el-button :disabled="!windSwitch1" :icon="isWindPlay ? VideoPause : VideoPlay" @click="(e) => handleVideoPlay('sliderValueWind', 'wind', 'tiff-wind', firstWind, 'isWindPlay', 'timerWind')" />
+                                    <el-button :disabled="!windSwitch1" :icon="isWindPlay ? VideoPause : VideoPlay" @click="(e) => handleVideoPlay(sliderValueWind, 'wind-source', 'wind-layer', timeWind[sliderValueWind], isWindPlay, timerWind, 1000)" />
                                 </el-button-group>
-                                <el-slider :disabled="!windSwitch1" v-model="sliderValueWind" :max="sliderMax" @change="(e) => handleSliderChange(sliderValueWind, 'wind', 'tiff-wind')"/>
+                                <el-slider :disabled="!windSwitch1" v-model="sliderValueWind" :max="sliderMax" @change="(e) => handleSliderChange(sliderValueWind, 'wind-source', 'wind-layer', timeWind[sliderValueWind])"/>
                             </div>
                         </div> 
                     </div>                   
@@ -160,8 +160,6 @@
   import { ElMessage } from 'element-plus';
   import { ElTabs, ElTabPane, ElSpace } from 'element-plus';
   import MultiLineChart from '@/components/MultiLineChart.vue';
-  import { contours } from 'd3-contour';
-  import proj4 from 'proj4';
   import { getImage, getImageAndJump, getImageWindTest } from '@/components/Mapbox/index.js';
   import { VideoPlay, VideoPause } from '@element-plus/icons-vue';
   import * as GeoTIFF from 'geotiff';
@@ -280,7 +278,7 @@
         getImage(mapInstance.value, tiff, layer)
   }
 
-  const setTiffAndJump = async (url, layer, zoom) => {
+  const setSourceAndJump = async (url, layer, zoom) => {
     const response = await fetch(url);
         const arrayBuffer = await response.arrayBuffer();
         const tiff = await GeoTIFF.fromArrayBuffer(arrayBuffer);
@@ -331,26 +329,26 @@
   }
   const forestSwitch2=ref(false);
 
-  const setUrl = (sourceName ,fileName) => {
-      const sources = {
-        'junshan': 'Junshan_AGBD',
-        'ocean': 'ssprocess',
-        'wind': 'wind',
-      }
-      const oceanFiles = {
-        '2020/04/09': '20200409',
-        '2021/03/20': '20210320',
-        '2022/04/09': '20220409',
-      }
-      const windPreif = 'CCMP_Wind_Analysis_'
-      let url = '';
-      if(sourceName === 'wind') {
-        url = `../../${sources[sourceName]}/${windPreif}${fileName}.tif`;
-      } else {
-        url = `../../${sources[sourceName]}/${fileName}.tif`;
-      }
+  const setUrl = (time, layerName, server='http://localhost:8080/geoserver/test/wms') => {
+      let url = `${server}?service=WMS&version=1.1.0&request=GetMap&layers=${layerName}&bbox={bbox-epsg-3857}&width=512&height=512&srs=EPSG:3857&time=${time}&styles=&format=image/png&TRANSPARENT=true`;
       console.log(url)
       return url;
+  }
+
+    //时序切换，更换wms服务source里的tiles地址
+  const handleWMSTimeChange = (layerName, time, sourceName, server='http://localhost:8080/geoserver/test/wms') => {
+    const layerPrefix = layerName.split('-')[0];
+    const layer = urlLayers[layerPrefix];
+    // http://localhost:8080/geoserver/test/wms?service=WMS&version=1.1.0&request=GetMap&layers=test:SS20181226&bbox={bbox-epsg-3857}&width=512&height=512&srs=EPSG:3857&styles=&format=image/png&TRANSPARENT=true
+    const url = `${server}?service=WMS&version=1.1.0&request=GetMap&layers=${layer}&bbox={bbox-epsg-3857}&width=512&height=512&srs=EPSG:3857&time=${time}&styles=&format=image/png&TRANSPARENT=true`
+    mapInstance.value.getSource(sourceName).setTiles([url]);
+  }
+
+  const urlLayers  = {
+    'wind': 'test:SS20181226',
+    'junshan': "test:SS20181226",
+    'wildfire': 'test:SS20181226',
+    'sphk': ''
   }
 
   //碳汇部分
@@ -358,12 +356,12 @@
   const sliderValueJunShan = ref(0);
   const isPlayJunShan = ref(false);
   const timerJunShan = ref(null);
-  const sliderMaxJunShan = 2; // 和地图文件数量有关
-  const filesJunShan = [
-    'Junshan_AGBD_2020_pro',
-    'Junshan_AGBD_2021_pro',
-    'Junshan_AGBD_2022_pro',
+  const timeJunShan = [
+    '2020-01-01',
+    '2021-01-01',
+    '2022-01-01',
   ]
+  const sliderMaxJunShan = timeJunShan.length - 1; // 时序slider的间隔数量，和地图文件数量有关
 
   //环境部分
   const wildfireSwitch = ref(false);
@@ -420,25 +418,15 @@
 //   }
 
 //wms
-const handleWildfireSwitchChange = (status) => {
+const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTime, timer) => {
     const map = mapInstance.value;
-    const layerName = 'wildfire-layer';
-    const sourceName = 'wildfire-source';
     if (status) {
+        const tilesUrl = setUrl(selectedTime, layerName);
         map.addSource(sourceName, {
             type: 'raster',
-            // tiles: [
-            //     tilePath + '-180, 0, -90, 90',
-            //     tilePath + '-180, -90, -90, 0',
-            //     tilePath + '-90, 0, 0, 90',
-            //     tilePath + '-90, -90, 0, 0',
-            //     tilePath + '0, 0, 90, 90',
-            //     tilePath + '0, -90, 90, 0'
-            // ],
             tiles: [
-                'https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?Service=WMTS&Request=GetTile&Version=1.0.0 &layer=MODIS_Terra_CorrectedReflectance_TrueColor&tilematrixset=250m&TileMatrix=6&TileCol=36&TileRow=13&style=default&TIME=2012-07-09&Format=image%2Fjpeg'
+                tilesUrl
             ],
-            // 'matrixSet': 'EPSG:4326',
             'tileSize': 512,
         });
         map.addLayer({
@@ -457,16 +445,23 @@ const handleWildfireSwitchChange = (status) => {
     } else {
         if (mapInstance.value.getLayer(layerName)) mapInstance.value.removeLayer(layerName);
         if (mapInstance.value.getSource(sourceName)) mapInstance.value.removeSource(sourceName);
+        if (timer) { clearInterval(timer)}
     }  
   }
 
   //海洋部分
   const oceanSwitch1 = ref(false);
   const sliderValueSPHK = ref(0);
-  const isPlay = ref(false);
+  const isPlaySPHK = ref(false);
   const step = 1; 
   const sliderMax = 7; // 和地图文件数量有关
-  const filesWind = [
+  const timeSPHK = [
+    '2018-12-26',
+    '2019-01-25',
+    '2019-04-25',
+    '2019-08-08'
+  ];
+  const timeWind = [
     '2023-09-01 00:00:00',
     '2023-09-01 06:00:00',
     '2023-09-01 12:00:00',
@@ -476,60 +471,43 @@ const handleWildfireSwitchChange = (status) => {
     '2023-09-02 12:00:00',
     '2023-09-02 18:00:00',
     ];
-  const handleVisibilitySwitchChange = async (value, sliderModel, source, layer, fileSource=filesWind, zoom=10) => {
-    const status = value === true ? 'visible' : 'none';
-    // mapInstance.value.setLayoutProperty(layer, 'visibility', status);
-    let files = fileSource;
-    if (value) {
-        if(mapInstance.value.getSource(source)) {
-            mapInstance.value.setLayoutProperty(layer, 'visibility', 'visible');
-        } else {
-            setTiffAndJump(setUrl(source, files[sliderModel]), layer, zoom);
-        }
-    } else {
-        const layerName = `layer-${layer}`;
-        clearInterval(timerWind.value); // 清除定时器
-        if (mapInstance.value && mapInstance.value.getLayer(layerName)) mapInstance.value.removeLayer(layerName);
-        if (mapInstance.value && mapInstance.value.getSource(layer)) mapInstance.value.removeSource(layer);
-    }
-  }
 
-  const handleSliderChange = async (sliderModel, source, layer, fileSource=filesWind) => {
-    let files = fileSource;
-    setTiff(setUrl(source, files[sliderModel]), layer);
+//   const handleVisibilitySwitchChange = async (value, sliderModel, layer, timeSource, zoom=10) => {
+//     const status = value === true ? 'visible' : 'none';
+//     let timeStamps = timeSource;
+//     if (value) {
+//         if(mapInstance.value.getSource(source)) {
+//             mapInstance.value.setLayoutProperty(layer, 'visibility', 'visible');
+//         } else {
+//             setSourceAndJump(setUrl(files[sliderModel]), layer, zoom);
+//         }
+//     } else {
+//         const layerName = `layer-${layer}`;
+//         clearInterval(timerWind.value); // 清除定时器
+//         if (mapInstance.value && mapInstance.value.getLayer(layerName)) mapInstance.value.removeLayer(layerName);
+//         if (mapInstance.value && mapInstance.value.getSource(layer)) mapInstance.value.removeSource(layer);
+//     }
+//   }
+
+  const handleSliderChange = async (sliderModel, source, layer, sliderValues) => {
+    handleWMSTimeChange(layer, sliderValues[sliderModel], source);
   }
 
   const isWindPlay = ref(false);
   const timerWind = ref(null);
     
-  const handleVideoPlay = (sliderStatusName, source, layer, fileSource=filesWind, playStatusName, intervalName, interval = 1000) => {
-    const sliderModels = {
-        'sliderValueJunShan': sliderValueJunShan,
-        'sliderValueWind': sliderValueWind
-    }
-    const playStatusModels = {
-        'isPlayJunShan': isPlayJunShan,
-        'isWindPlay': isWindPlay
-    }
-    const timers = {
-        'timerJunShan': timerJunShan,
-        'timerWind': timerWind
-    }
-    let files = fileSource;
-    let playStatusModel = playStatusModels[playStatusName];
-    let intervalModel = timers[intervalName];
-    let sliderModel = sliderModels[sliderStatusName];
-    playStatusModel.value = !playStatusModel.value;
-    if (playStatusModel.value) {
-      intervalModel.value = setInterval(() => {
-        sliderModel.value++;
-        if (sliderModel.value >= files.length) {
-          sliderModel.value = 0;
+  const handleVideoPlay = (sliderModel, source, layer, sliderValues, playStatusModel, timer, intervalTime = 1500) => {
+    playStatusModel = !playStatusModel;
+    if (playStatusModel) {
+      timer = setInterval(() => {
+        sliderModel++;
+        if (sliderModel.value >= sliderValues.length) {
+          sliderModel = 0;
         }
-        setTiff(setUrl(source, files[sliderModel.value]), layer);
-      }, interval);
+        handleWMSTimeChange(layer, sliderValues[sliderModel], source);
+      }, intervalTime);
     } else {
-      clearInterval(intervalModel.value);
+      clearInterval(timer);
     }
   }
   const handleRadioChange = async (value) => {
@@ -547,7 +525,8 @@ const handleWildfireSwitchChange = (status) => {
   const windSwitch1 = ref(false);
   const sliderValueWind = ref(0);
   
-  const getModels = async () => {
+  //获取大模型分类
+    const getModels = async () => {
         const res = await get('/api/models', {})
         modelOptions.value = res.map((item) => {
             return {
@@ -557,6 +536,8 @@ const handleWildfireSwitchChange = (status) => {
         })
     }
     getModels();
+
+    //获取达模型数据
     const query = async () => {
         const [xPosition, yPosition ] = lngLat.value;
         if(xPosition === 0 || yPosition === 0) {
