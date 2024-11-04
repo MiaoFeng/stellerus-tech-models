@@ -38,9 +38,6 @@ importers:
       proj4:
         specifier: ^2.14.0
         version: 2.14.0
-      rastertile:
-        specifier: ^1.0.0
-        version: 1.0.0
       sass:
         specifier: ^1.77.8
         version: 1.79.5
@@ -576,10 +573,6 @@ packages:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==, tarball: https://registry.npmmirror.com/braces/-/braces-3.0.3.tgz}
     engines: {node: '>=8'}
 
-  chalk@5.3.0:
-    resolution: {integrity: sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==, tarball: https://registry.npmmirror.com/chalk/-/chalk-5.3.0.tgz}
-    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
-
   cheap-ruler@4.0.0:
     resolution: {integrity: sha512-0BJa8f4t141BYKQyn9NSQt1PguFQXMXwZiA5shfoaBYHAb2fFk2RAX+tiWMoQU+Agtzt3mdt0JtuyshAXqZ+Vw==, tarball: https://registry.npmmirror.com/cheap-ruler/-/cheap-ruler-4.0.0.tgz}
 
@@ -593,10 +586,6 @@ packages:
 
   commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==, tarball: https://registry.npmmirror.com/commander/-/commander-2.20.3.tgz}
-
-  commander@9.5.0:
-    resolution: {integrity: sha512-KRs7WVDKg86PWiuAqhDrAQnTXZKraVcCc6vFdL14qrZ/DcWwuRo7VoiYXalXO7S5GKpqYiVEwCbgFDfxNHKJBQ==, tarball: https://registry.npmmirror.com/commander/-/commander-9.5.0.tgz}
-    engines: {node: ^12.20.0 || >=14}
 
   copy-anything@2.0.6:
     resolution: {integrity: sha512-1j20GZTsvKNkc4BY3NpMOM8tt///wY3FpIzozTOFO2ffuZcV61nojHXVKIy3WM+7ADCy5FVhdZYHYDdgTU0yJw==, tarball: https://registry.npmmirror.com/copy-anything/-/copy-anything-2.0.6.tgz}
@@ -681,12 +670,6 @@ packages:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==, tarball: https://registry.npmmirror.com/fsevents/-/fsevents-2.3.3.tgz}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
-
-  gdal-next@2.8.0:
-    resolution: {integrity: sha512-AGae+OMGYZQt2DcmEigmqVJPvbyJ5pvYMu2K+VDi12oWYpAItTZbT1Xwx6hZCWnxNfQ4WnXsVoZC6q8XiN1TRA==, tarball: https://registry.npmmirror.com/gdal-next/-/gdal-next-2.8.0.tgz}
-    engines: {node: '>= 10'}
-    bundledDependencies:
-      - '@mapbox/node-pre-gyp'
 
   geojson-vt@4.0.2:
     resolution: {integrity: sha512-AV9ROqlNqoZEIJGfm1ncNjEXfkz2hdFlZf0qkVfmkwdKa8vj7H16YUOT81rJw1rdFhyEDlN2Tds91p/glzbl5A==, tarball: https://registry.npmmirror.com/geojson-vt/-/geojson-vt-4.0.2.tgz}
@@ -798,12 +781,6 @@ packages:
   murmurhash-js@1.0.0:
     resolution: {integrity: sha512-TvmkNhkv8yct0SVBSy+o8wYzXjE4Zz3PCesbfs8HiCXXdcTuocApFv11UWlNFWKYsP2okqrhb7JNlSm9InBhIw==, tarball: https://registry.npmmirror.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz}
 
-  nan@2.22.0:
-    resolution: {integrity: sha512-nbajikzWTMwsW+eSsNm3QwlOs7het9gGJU5dDZzRTQGk03vyBOauxgI4VakDzE0PtsGTmXPsXTbbjVhRwR5mpw==, tarball: https://registry.npmmirror.com/nan/-/nan-2.22.0.tgz}
-
-  nanoid@2.1.11:
-    resolution: {integrity: sha512-s/snB+WGm6uwi0WjsZdaVcuf3KJXlfGl2LcxgwkEwJF0D/BWzVWAZW/XY4bFaiR7s0Jk3FPvlnepg1H1b1UwlA==, tarball: https://registry.npmmirror.com/nanoid/-/nanoid-2.1.11.tgz}
-
   nanoid@3.3.7:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==, tarball: https://registry.npmmirror.com/nanoid/-/nanoid-3.3.7.tgz}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -874,10 +851,6 @@ packages:
   quickselect@3.0.0:
     resolution: {integrity: sha512-XdjUArbK4Bm5fLLvlm5KpTFOiOThgfWWI4axAZDWg4E/0mKdZyI9tNEfds27qCi1ze/vwTR16kvmmGhRra3c2g==, tarball: https://registry.npmmirror.com/quickselect/-/quickselect-3.0.0.tgz}
 
-  rastertile@1.0.0:
-    resolution: {integrity: sha512-uk92O6qBR7OAzPv+QK7sYUAiDb5BXhKcUIAg/QLYvklBrcAHok7tXzimc2w94PVj1AG7LIShTyMiYZ9jnp9a0w==, tarball: https://registry.npmmirror.com/rastertile/-/rastertile-1.0.0.tgz}
-    hasBin: true
-
   readdirp@4.0.2:
     resolution: {integrity: sha512-yDMz9g+VaZkqBYS/ozoBJwaBhTbZo3UNYQHNRw1D3UFQB8oHB4uS/tAODO+ZLjGWmUbKnIlOWO+aaIiAxrUWHA==, tarball: https://registry.npmmirror.com/readdirp/-/readdirp-4.0.2.tgz}
     engines: {node: '>= 14.16.0'}
@@ -914,10 +887,6 @@ packages:
   serialize-to-js@3.1.2:
     resolution: {integrity: sha512-owllqNuDDEimQat7EPG0tH7JjO090xKNzUtYz6X+Sk2BXDnOCilDdNLwjWeFywG9xkJul1ULvtUQa9O4pUaY0w==, tarball: https://registry.npmmirror.com/serialize-to-js/-/serialize-to-js-3.1.2.tgz}
     engines: {node: '>=4.0.0'}
-
-  shortid@2.2.16:
-    resolution: {integrity: sha512-Ugt+GIZqvGXCIItnsL+lvFJOiN7RYqlGy7QE41O3YC1xbNSeDGIRO7xg2JJXIAj1cAGnOeC1r7/T9pgrtQbv4g==, tarball: https://registry.npmmirror.com/shortid/-/shortid-2.2.16.tgz}
-    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==, tarball: https://registry.npmmirror.com/source-map-js/-/source-map-js-1.2.1.tgz}
@@ -1453,8 +1422,6 @@ snapshots:
     dependencies:
       fill-range: 7.1.1
 
-  chalk@5.3.0: {}
-
   cheap-ruler@4.0.0: {}
 
   chokidar@4.0.1:
@@ -1466,8 +1433,6 @@ snapshots:
       delayed-stream: 1.0.0
 
   commander@2.20.3: {}
-
-  commander@9.5.0: {}
 
   copy-anything@2.0.6:
     dependencies:
@@ -1572,10 +1537,6 @@ snapshots:
 
   fsevents@2.3.3:
     optional: true
-
-  gdal-next@2.8.0:
-    dependencies:
-      nan: 2.22.0
 
   geojson-vt@4.0.2: {}
 
@@ -1710,10 +1671,6 @@ snapshots:
 
   murmurhash-js@1.0.0: {}
 
-  nan@2.22.0: {}
-
-  nanoid@2.1.11: {}
-
   nanoid@3.3.7: {}
 
   needle@3.3.1:
@@ -1773,13 +1730,6 @@ snapshots:
 
   quickselect@3.0.0: {}
 
-  rastertile@1.0.0:
-    dependencies:
-      chalk: 5.3.0
-      commander: 9.5.0
-      gdal-next: 2.8.0
-      shortid: 2.2.16
-
   readdirp@4.0.2: {}
 
   regenerator-runtime@0.14.1: {}
@@ -1829,10 +1779,6 @@ snapshots:
     optional: true
 
   serialize-to-js@3.1.2: {}
-
-  shortid@2.2.16:
-    dependencies:
-      nanoid: 2.1.11
 
   source-map-js@1.2.1: {}
 
