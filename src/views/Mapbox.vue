@@ -421,7 +421,9 @@
 const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTime, timer) => {
     const map = mapInstance.value;
     if (status) {
-        const tilesUrl = setUrl(selectedTime, layerName);
+        const layerPrefix = layerName.split('-')[0];
+        const layer = urlLayers[layerPrefix];
+        const tilesUrl = setUrl(selectedTime, layer);
         map.addSource(sourceName, {
             type: 'raster',
             tiles: [
