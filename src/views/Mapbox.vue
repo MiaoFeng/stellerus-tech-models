@@ -202,9 +202,9 @@
         const { lng, lat } = e.lngLat;
         lngLat.value = [lng, lat];
         //获取点击处图层
-        const features = map.queryRenderedFeatures(e.point, {
-            layers: ["tiff-layer"],
-        });
+        // const features = map.queryRenderedFeatures(e.point, {
+        //     layers: ["tiff-layer"],
+        // });
     });
     return {
         mapInstance,
@@ -280,14 +280,14 @@
   }
   const forestSwitch2=ref(false);
 
-  const setUrl = (time, layerName, server='http://localhost:8080/geoserver/test/wms') => {
+  const setUrl = (time, layerName, server='http://localhost:8080/geoserver/TimeSeries/wms') => {
       let url = `${server}?service=WMS&version=1.1.0&request=GetMap&layers=${layerName}&bbox={bbox-epsg-3857}&width=512&height=512&srs=EPSG:3857&time=${time}&styles=&format=image/png&TRANSPARENT=true`;     
       console.log(encodeURIComponent(url))    
       return url;
   }
 
     //时序切换，更换wms服务source里的tiles地址
-  const handleWMSTimeChange = (layerName, time, sourceName, server='http://localhost:8080/geoserver/test/wms') => {
+  const handleWMSTimeChange = (layerName, time, sourceName, server='http://localhost:8080/geoserver/TimeSeries/wms') => {
     const layerPrefix = layerName.split('-')[0];
     const layer = urlLayers[layerPrefix];
     // http://localhost:8080/geoserver/test/wms?service=WMS&version=1.1.0&request=GetMap&layers=test:SS20181226&bbox={bbox-epsg-3857}&width=512&height=512&srs=EPSG:3857&styles=&format=image/png&TRANSPARENT=true
@@ -296,10 +296,10 @@
   }
 
   const urlLayers  = {
-    'wind': 'test:SS20181226',
-    'junshan': "test:SS20181226",
-    'wildfire': 'test:SS20181226',
-    'sphk': ''
+    'wind': 'TimeSeries:HKSS',
+    'junshan': "TimeSeries:JunShanAGB",
+    'wildfire': 'TimeSeries:HKSS',
+    'sphk': 'TimeSeries:HKSS'
   }
 
   //碳汇部分
@@ -322,7 +322,7 @@
         if (sliderValueJunShan.value >= timeJunShan.length) {
             sliderValueJunShan.value = 0;
         }
-        handleWMSTimeChange(layer, timerJunShan[sliderValueJunShan.value], source);
+        handleWMSTimeChange(layer, timeJunShan[sliderValueJunShan.value], source);
       }, intervalTime);
     } else {
       clearInterval(timerJunShan);
@@ -439,7 +439,7 @@ const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTim
         if (sliderValueSPHK.value >= timeSPHK.length) {
             sliderValueSPHK.value = 0;
         }
-        handleWMSTimeChange(layer, timerSPHK[sliderValueSPHK.value], source);
+        handleWMSTimeChange(layer, timeSPHK[sliderValueSPHK.value], source);
       }, intervalTime);
     } else {
       clearInterval(timerSPHK);
@@ -578,7 +578,7 @@ const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTim
         if (sliderValueWind.value >= timeWind.length) {
             sliderValueWind.value = 0;
         }
-        handleWMSTimeChange(layer, timerWind[sliderValueWind.value], source);
+        handleWMSTimeChange(layer, timeWind[sliderValueWind.value], source);
       }, intervalTime);
     } else {
       clearInterval(timerWind);
