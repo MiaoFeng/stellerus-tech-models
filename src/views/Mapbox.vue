@@ -23,7 +23,7 @@
                             <p class="description">Monitoring data of wild terrestrial animals on Junshan Island, Yueyang, Hunan。</p>
                             <div class="slider-demo-block">
                                 <el-button-group class="ml-4" size="small">
-                                    <el-button :disabled="!junShanSwitch1" :icon="isPlayJunShan ? VideoPause : VideoPlay" @click="(e) => handleVideoPlay(sliderValueJunShan, 'junshan-source', 'junshan-layer', timeJunShan[sliderValueJunShan], isPlayJunShan, timerJunShan, 2000)" />
+                                    <el-button :disabled="!junShanSwitch1" :icon="isPlayJunShan ? VideoPause : VideoPlay" @click="(e) => handleVideoPlayJunShan('junshan-source', 'junshan-layer', 2000)" />
                                 </el-button-group>
                                 <el-slider :disabled="!junShanSwitch1" v-model="sliderValueJunShan" :max="sliderMaxJunShan" @change="(e) => handleSliderChange(sliderValueJunShan, 'junshan-source', 'junshan-layer', timeJunShan)" />
                             </div>
@@ -66,9 +66,9 @@
                             <p class="description">One of the indicators to measure water pollution.</p>
                             <div class="slider-demo-block">
                                 <el-button-group class="ml-4" size="small">
-                                    <el-button :disabled="!oceanSwitch1" :icon="isPlay ? VideoPause : VideoPlay" @click="(e) => handleVideoPlay(sliderValueSPHK, 'sphk-source', 'sphk-layer', timeSPHK[sliderValueSPHK], isPlaySPHK, timerSPHK, 2000)" />
+                                    <el-button :disabled="!oceanSwitch1" :icon="isPlaySPHK ? VideoPause : VideoPlay" @click="(e) => handleVideoPlaySPHK('sphk-source', 'sphk-layer', 2000)" />
                                 </el-button-group>
-                                <el-slider :disabled="!oceanSwitch1" v-model="sliderValueSPHK" :max="sliderMax" @change="(e) => handleSliderChange(sliderValueSPHK, 'sphk-source', 'sphk-layer', timeSPHK[sliderValueSPHK])"/>
+                                <el-slider :disabled="!oceanSwitch1" v-model="sliderValueSPHK" :max="sliderMaxSPHK" @change="(e) => handleSliderChange(sliderValueSPHK, 'sphk-source', 'sphk-layer', timeSPHK[sliderValueSPHK])"/>
                             </div>
                         </div>                      
                     </div>                   
@@ -135,9 +135,9 @@
                             <p class="description">Show the wind speed with time series data.</p>
                             <div class="slider-demo-block">
                                 <el-button-group class="ml-4" size="small">
-                                    <el-button :disabled="!windSwitch1" :icon="isWindPlay ? VideoPause : VideoPlay" @click="(e) => handleVideoPlay(sliderValueWind, 'wind-source', 'wind-layer', timeWind[sliderValueWind], isWindPlay, timerWind, 1000)" />
+                                    <el-button :disabled="!windSwitch1" :icon="isPlayWind ? VideoPause : VideoPlay" @click="(e) => handleVideoPlayWind('wind-source', 'wind-layer', 1500)" />
                                 </el-button-group>
-                                <el-slider :disabled="!windSwitch1" v-model="sliderValueWind" :max="sliderMax" @change="(e) => handleSliderChange(sliderValueWind, 'wind-source', 'wind-layer', timeWind[sliderValueWind])"/>
+                                <el-slider :disabled="!windSwitch1" v-model="sliderValueWind" :max="sliderMaxWind" @change="(e) => handleSliderChange(sliderValueWind, 'wind-source', 'wind-layer', timeWind[sliderValueWind])"/>
                             </div>
                         </div> 
                     </div>                   
@@ -176,38 +176,6 @@
     const map = new mapboxgl.Map({
       container: 'map', // div 名称
       style: 'mapbox://styles/mapbox/satellite-streets-v11',
-    //   style: {
-    //         version: 8,
-    //         imports: [
-    //         {
-    //             id: "basemap",
-    //             url: '../../public/standard.json',
-    //         }
-    //         ],
-    //         sources: {
-    //             'chongqing': {
-    //                 type: 'geojson',
-    //                 data: '../../public/cq.geojson',
-    //             }
-    //         },
-    //         layers: [
-    //         {
-    //             id: 'polygon-layer',
-    //             type: 'fill',
-    //             source: 'chongqing',
-    //             slot: 'bottom',
-    //             paint: {
-    //             'fill-color': '#FFD273',
-    //             'fill-opacity': 0.8,
-    //             },
-    //         }
-    //         ]
-    //     },// 底图Url
-    // style: {
-    //     "version": 8,
-    //     "sources": {},
-    //     "layers": []
-    // },
     center: [100.08, 35.4],
     //   center: [107.744809, 30.180706], // 地图初始化后的定位位置
     minZoom: 1.4,
@@ -227,33 +195,6 @@
         unit: 'imperial'
     });
     map.addControl(scale, 'bottom-right');
-    // vectorTile(map);
-    map.on('load', () => {
-        // addRasterTileLayer(map,vecwUrl,'vecw','vecw')
-        // addRasterTileLayer(map,cvawUrl,'cvaw','cvaw')
-        // map.transform.setProjectionMatrix(mapboxgl.MercatorCoordinate.PROJECTION_MATRIX);
-        // setTiff(url, 'test-wind');
-    })
-    // map.on("load", function () {
-    //     const tile = 'https://geogenius.cn-north-4.myhuaweicloud.com/v1/0ba999a55580256b2fdac013c7e7f624/image/collection/wmts/CQ/hw_hk_01/5RF4L3XPYNEKSEB5IBUH/ISReySOtQ6Tc715percent2FzMzn1pOTilMpercent3D/1761379192752';
-    //     map.addSource('sourceId', {
-    //         type: "raster",
-    //         tiles: [tile],
-    //         tileSize: 256,
-    //     });
- 
-    //     const wmtsLayer = {
-    //         id: 'layerId',
-    //         type: "raster",
-    //         source: 'sourceId',
-    //         minZoom: 1,
-    //         maxZoom: 18,
-    //         paint: {
-    //             "raster-opacity": 1,
-    //         },
-    //     };
-    //     map.addLayer(wmtsLayer);
-    // })
 
     mapInstance.value = map;
     map.on('click', (e) => {
@@ -304,21 +245,31 @@
         junShanSwitch1.value = false;
         sliderValueJunShan.value = 0;
         isPlayJunShan.value = false;
-        clearInterval(timerJunShan.value); // 清除定时器
-        const layer = 'tiff-junshan';
-        const layerName = `layer-${layer}`;
-        if (mapInstance.value && mapInstance.value.getLayer(layerName)) mapInstance.value.removeLayer(layerName);
-        if (mapInstance.value && mapInstance.value.getSource(layer)) mapInstance.value.removeSource(layer);
+        clearInterval(timerJunShan); // 清除定时器
+        const layer = 'junshan-layer';
+        const source = 'junshan-source';
+        if (mapInstance.value && mapInstance.value.getLayer(layer)) mapInstance.value.removeLayer(layer);
+        if (mapInstance.value && mapInstance.value.getSource(source)) mapInstance.value.removeSource(source);
+    }
+    if(lastActiveName === 'third') {
+        oceanSwitch1.value = false;
+        sliderValueSPHK.value = 0;
+        isPlaySPHK.value = false;
+        clearInterval(timerSPHK); // 清除定时器
+        const layer = 'sphk-layer';
+        const source = 'sphk-source';
+        if (mapInstance.value && mapInstance.value.getLayer(layer)) mapInstance.value.removeLayer(layer);
+        if (mapInstance.value && mapInstance.value.getSource(source)) mapInstance.value.removeSource(source);
     }
     if(lastActiveName === 'fourth') {
         windSwitch1.value = false;
         sliderValueWind.value = 0;
-        isWindPlay.value = false;
-        clearInterval(timerWind.value); // 清除定时器
-        const layer = 'tiff-wind';
-        const layerName = `layer-${layer}`;
-        if (mapInstance.value && mapInstance.value.getLayer(layerName)) mapInstance.value.removeLayer(layerName);
-        if (mapInstance.value && mapInstance.value.getSource(layer)) mapInstance.value.removeSource(layer);
+        isPlayWind.value = false;
+        clearInterval(timerWind); // 清除定时器
+        const layer = 'wind-layer';
+        const source = 'wind-source';
+        if (mapInstance.value && mapInstance.value.getLayer(layer)) mapInstance.value.removeLayer(layer);
+        if (mapInstance.value && mapInstance.value.getSource(source)) mapInstance.value.removeSource(source);
     }
   };
 
@@ -330,8 +281,8 @@
   const forestSwitch2=ref(false);
 
   const setUrl = (time, layerName, server='http://localhost:8080/geoserver/test/wms') => {
-      let url = `${server}?service=WMS&version=1.1.0&request=GetMap&layers=${layerName}&bbox={bbox-epsg-3857}&width=512&height=512&srs=EPSG:3857&time=${time}&styles=&format=image/png&TRANSPARENT=true`;
-      console.log(url)
+      let url = `${server}?service=WMS&version=1.1.0&request=GetMap&layers=${layerName}&bbox={bbox-epsg-3857}&width=512&height=512&srs=EPSG:3857&time=${time}&styles=&format=image/png&TRANSPARENT=true`;     
+      console.log(encodeURIComponent(url))    
       return url;
   }
 
@@ -355,13 +306,28 @@
   const junShanSwitch1 = ref(false);
   const sliderValueJunShan = ref(0);
   const isPlayJunShan = ref(false);
-  const timerJunShan = ref(null);
+  let timerJunShan = null;
   const timeJunShan = [
     '2020-01-01',
     '2021-01-01',
     '2022-01-01',
   ]
   const sliderMaxJunShan = timeJunShan.length - 1; // 时序slider的间隔数量，和地图文件数量有关
+  const handleVideoPlayJunShan = (source, layer, intervalTime = 1500) => {
+    isPlayJunShan.value = !isPlayJunShan.value;
+
+    if (isPlayJunShan.value) {
+      timerJunShan = setInterval(() => {
+        sliderValueJunShan.value++;
+        if (sliderValueJunShan.value >= timeJunShan.length) {
+            sliderValueJunShan.value = 0;
+        }
+        handleWMSTimeChange(layer, timerJunShan[sliderValueJunShan.value], source);
+      }, intervalTime);
+    } else {
+      clearInterval(timerJunShan);
+    }
+  }
 
   //环境部分
   const wildfireSwitch = ref(false);
@@ -455,24 +421,31 @@ const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTim
   const oceanSwitch1 = ref(false);
   const sliderValueSPHK = ref(0);
   const isPlaySPHK = ref(false);
-  const step = 1; 
-  const sliderMax = 7; // 和地图文件数量有关
+  let timerSPHK = null;
+  const step = 1;
   const timeSPHK = [
     '2018-12-26',
     '2019-01-25',
     '2019-04-25',
     '2019-08-08'
   ];
-  const timeWind = [
-    '2023-09-01 00:00:00',
-    '2023-09-01 06:00:00',
-    '2023-09-01 12:00:00',
-    '2023-09-01 18:00:00',
-    '2023-09-02 00:00:00',
-    '2023-09-02 06:00:00',
-    '2023-09-02 12:00:00',
-    '2023-09-02 18:00:00',
-    ];
+  const sliderMaxSPHK = timeSPHK.length - 1; // 和地图文件数量有关
+  const handleVideoPlaySPHK = (source, layer, intervalTime = 2000) => {
+    isPlaySPHK.value = !isPlaySPHK.value;
+
+    if (isPlaySPHK.value) {
+      timerSPHK = setInterval(() => {
+        sliderValueSPHK.value++;
+        if (sliderValueSPHK.value >= timeSPHK.length) {
+            sliderValueSPHK.value = 0;
+        }
+        handleWMSTimeChange(layer, timerSPHK[sliderValueSPHK.value], source);
+      }, intervalTime);
+    } else {
+      clearInterval(timerSPHK);
+    }
+  }
+
 
 //   const handleVisibilitySwitchChange = async (value, sliderModel, layer, timeSource, zoom=10) => {
 //     const status = value === true ? 'visible' : 'none';
@@ -494,27 +467,11 @@ const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTim
   const handleSliderChange = async (sliderModel, source, layer, sliderValues) => {
     handleWMSTimeChange(layer, sliderValues[sliderModel], source);
   }
-
-  const isWindPlay = ref(false);
-  const timerWind = ref(null);
     
-  const handleVideoPlay = (sliderModel, source, layer, sliderValues, playStatusModel, timer, intervalTime = 1500) => {
-    playStatusModel = !playStatusModel;
-    if (playStatusModel) {
-      timer = setInterval(() => {
-        sliderModel++;
-        if (sliderModel.value >= sliderValues.length) {
-          sliderModel = 0;
-        }
-        handleWMSTimeChange(layer, sliderValues[sliderModel], source);
-      }, intervalTime);
-    } else {
-      clearInterval(timer);
-    }
-  }
   const handleRadioChange = async (value) => {
     radio.value = value;
   }
+
   //气象部分
   const modelOptions = ref([]);
   const modelList = ref([]);
@@ -526,6 +483,19 @@ const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTim
   const date = ref(new Date().toLocaleDateString('en-CA'));
   const windSwitch1 = ref(false);
   const sliderValueWind = ref(0);
+  const isPlayWind = ref(false);
+  let timerWind = null;
+  const timeWind = [
+    '2023-09-01 00:00:00',
+    '2023-09-01 06:00:00',
+    '2023-09-01 12:00:00',
+    '2023-09-01 18:00:00',
+    '2023-09-02 00:00:00',
+    '2023-09-02 06:00:00',
+    '2023-09-02 12:00:00',
+    '2023-09-02 18:00:00',
+    ];
+  const sliderMaxWind = timeWind.length - 1;
   
   //获取大模型分类
     const getModels = async () => {
@@ -599,7 +569,21 @@ const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTim
         console.log(chart)
     }
 
-    const sliderValue = ref(0)
+    const handleVideoPlayWind = (source, layer, intervalTime = 2000) => {
+    isPlayWind.value = !isPlayWind.value;
+
+    if (isPlayWind.value) {
+      timerWind = setInterval(() => {
+        sliderValueWind.value++;
+        if (sliderValueWind.value >= timeWind.length) {
+            sliderValueWind.value = 0;
+        }
+        handleWMSTimeChange(layer, timerWind[sliderValueWind.value], source);
+      }, intervalTime);
+    } else {
+      clearInterval(timerWind);
+    }
+  }
 
     // vector tile
     const vectorTile = (map) => {
