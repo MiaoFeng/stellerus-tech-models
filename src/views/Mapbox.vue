@@ -16,7 +16,7 @@
                         </div>
                     </template> 
                     <div class="tab-content wt-320">
-                        <h4>Carbon Source</h4>
+                        <h4>Carbon Stock</h4>
                         <div class="content-section">
                             <el-switch v-model="junShanSwitch1" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'junshan-layer', 'junshan-source', timeJunShan[sliderValueJunShan], timerJunShan)" />
                             <span style="font-size: 12px; margin-left: 8px; color: #555">Junshan AGB biomass</span>
@@ -27,8 +27,20 @@
                                 </el-button-group>
                                 <el-slider :disabled="!junShanSwitch1" v-model="sliderValueJunShan" :max="sliderMaxJunShan" @change="(e) => handleSliderChange(sliderValueJunShan, 'junshan-source', 'junshan-layer', timeJunShan)" />
                             </div>
+
+                            <div style="margin-top: 16px;"></div>
+
+                            <el-switch v-model="gelephuSwitch1" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'gelephu-layer', 'gelephu-source', timeGelephu[sliderValueGelephu], timerGelephu)" />
+                            <span style="font-size: 12px; margin-left: 8px; color: #555">Bhutan Gelephu AGB</span>
+                            <p class="description">Monitoring data of forest in Gelephu, Bhutan。</p>
+                            <div class="slider-demo-block">
+                                <el-button-group class="ml-4" size="small">
+                                    <el-button :disabled="!gelephuSwitch1" :icon="isPlayGelephu ? VideoPause : VideoPlay" @click="(e) => handleVideoPlayGelephu('gelephu-source', 'gelephu-layer', 2000)" />
+                                </el-button-group>
+                                <el-slider :disabled="!gelephuSwitch1" v-model="sliderValueGelephu" :max="sliderMaxGelephu" @change="(e) => handleSliderChange(sliderValueGelephu, 'gelephu-source', 'gelephu-layer', timeGelephu)" />
+                            </div>
                         </div>
-                        <el-space />
+                        
                         <h4>Carbon Sink</h4>
                         <div class="content-section">
                             <el-switch v-model="forestSwitch1" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="handleForestSwitchChange" />
@@ -46,8 +58,15 @@
                     <div class="tab-content wt-320">
                         <h4>Wildfire Monitoring</h4>
                         <div class="content-section">
-                            <el-switch v-model="wildfireSwitch" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'wildfire-layer', 'wildfire-source')" />
-                            <span style="font-size: 12px; margin-left: 8px; color: #555">Global wildfire risk forecast</span>      
+                            <el-switch v-model="wildfireSwitch" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'wildfire-layer', 'wildfire-source', timeWildfire[sliderValueWildfire], timerWildfire)" />
+                            <span style="font-size: 12px; margin-left: 8px; color: #555">Global wildfire risk forecast</span>
+                            <p class="description">Monitoring wild fire risk in the global。</p>
+                            <div class="slider-demo-block">
+                                <el-button-group class="ml-4" size="small">
+                                    <el-button :disabled="!wildfireSwitch" :icon="isPlayWildfire ? VideoPause : VideoPlay" @click="(e) => handleVideoPlayWildfire('wildfire-source', 'wildfire-layer', 5000)" />
+                                </el-button-group>
+                                <el-slider :disabled="!wildfireSwitch" v-model="sliderValueWildfire" :max="sliderMaxWildfire" @change="(e) => handleSliderChange(sliderValueWildfire, 'wildfire-source', 'wildfire-layer', timeWildfire)" />
+                            </div>     
                         </div>
                     </div>                                   
                 </el-tab-pane>
@@ -69,6 +88,18 @@
                                     <el-button :disabled="!oceanSwitch1" :icon="isPlaySPHK ? VideoPause : VideoPlay" @click="(e) => handleVideoPlaySPHK('sphk-source', 'sphk-layer', 2000)" />
                                 </el-button-group>
                                 <el-slider :disabled="!oceanSwitch1" v-model="sliderValueSPHK" :max="sliderMaxSPHK" @change="(e) => handleSliderChange(sliderValueSPHK, 'sphk-source', 'sphk-layer', timeSPHK[sliderValueSPHK])"/>
+                            </div>
+                            
+                            <div style="margin-top: 16px;"></div>
+
+                            <el-switch v-model="chlaSwitch" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'chla-layer', 'chla-source', timeChla[sliderValueChla], timerChla)" />
+                            <span style="font-size: 12px; margin-left: 8px; color: #555">Chla</span>
+                            <p class="description">Seawater Chlorophyll near HongKong.</p>
+                            <div class="slider-demo-block">
+                                <el-button-group class="ml-4" size="small">
+                                    <el-button :disabled="!chlaSwitch" :icon="isPlayChla ? VideoPause : VideoPlay" @click="(e) => handleVideoPlayChla('chla-source', 'chla-layer', 2000)" />
+                                </el-button-group>
+                                <el-slider :disabled="!chlaSwitch" v-model="sliderValueChla" :max="sliderMaxChla" @change="(e) => handleSliderChange(sliderValueChla, 'chla-source', 'chla-layer', timeChla[sliderValueChla])"/>
                             </div>
                         </div>                      
                     </div>                   
@@ -242,6 +273,7 @@
         activeName.value = '';
     }
     if(lastActiveName === 'first') {
+        //junshan
         junShanSwitch1.value = false;
         sliderValueJunShan.value = 0;
         isPlayJunShan.value = false;
@@ -250,8 +282,26 @@
         const source = 'junshan-source';
         if (mapInstance.value && mapInstance.value.getLayer(layer)) mapInstance.value.removeLayer(layer);
         if (mapInstance.value && mapInstance.value.getSource(source)) mapInstance.value.removeSource(source);
+        //不丹
+        gelephuSwitch1.value = false;
+        sliderValueGelephu.value = 0;
+        isPlayGelephu.value = false;
+        clearInterval(timerGelephu); // 清除定时器
+        if (mapInstance.value && mapInstance.value.getLayer('gelephu-layer')) mapInstance.value.removeLayer('gelephu-layer');
+        if (mapInstance.value && mapInstance.value.getSource('gelephu-source')) mapInstance.value.removeSource('gelephu-source');
+    }
+    if(lastActiveName === 'second') {
+        wildfireSwitch.value = false;
+        sliderValueWildfire.value = 0;
+        isPlayWildfire.value = false;
+        clearInterval(timerWildfire); // 清除定时器
+        const layer = 'wildfire-layer';
+        const source = 'wildfire-source';
+        if (mapInstance.value && mapInstance.value.getLayer(layer)) mapInstance.value.removeLayer(layer);
+        if (mapInstance.value && mapInstance.value.getSource(source)) mapInstance.value.removeSource(source);
     }
     if(lastActiveName === 'third') {
+        //香港海水悬浮物
         oceanSwitch1.value = false;
         sliderValueSPHK.value = 0;
         isPlaySPHK.value = false;
@@ -260,6 +310,13 @@
         const source = 'sphk-source';
         if (mapInstance.value && mapInstance.value.getLayer(layer)) mapInstance.value.removeLayer(layer);
         if (mapInstance.value && mapInstance.value.getSource(source)) mapInstance.value.removeSource(source);
+        //香港海水叶绿素
+        chlaSwitch.value = false;
+        sliderValueChla.value = 0;
+        isPlayChla.value = false;
+        clearInterval(timerChla); // 清除定时器
+        if (mapInstance.value && mapInstance.value.getLayer('chla-layer')) mapInstance.value.removeLayer('chla-layer');
+        if (mapInstance.value && mapInstance.value.getSource('chla-source')) mapInstance.value.removeSource('chla-source');
     }
     if(lastActiveName === 'fourth') {
         windSwitch1.value = false;
@@ -303,6 +360,7 @@
   }
 
   //碳汇部分
+  //Junshan部分
   const junShanSwitch1 = ref(false);
   const sliderValueJunShan = ref(0);
   const isPlayJunShan = ref(false);
@@ -328,60 +386,60 @@
       clearInterval(timerJunShan);
     }
   }
+  //不丹部分
+  const gelephuSwitch1 = ref(false);
+  const sliderValueGelephu = ref(0);
+  const isPlayGelephu = ref(false);
+  let timerGelephu = null;
+  const timeGelephu = [
+    '2020-01-01',
+    '2021-01-01',
+    '2022-01-01',
+  ]
+  const sliderMaxGelephu = timeGelephu.length - 1; // 时序slider的间隔数量，和地图文件数量有关
+  const handleVideoPlayGelephu = (source, layer, intervalTime = 1500) => {
+    isPlayGelephu.value = !isPlayGelephu.value;
+
+    if (isPlayGelephu.value) {
+      timerGelephu = setInterval(() => {
+        sliderValueGelephu.value++;
+        if (sliderValueGelephu.value >= timeGelephu.length) {
+            sliderValueGelephu.value = 0;
+        }
+        handleWMSTimeChange(layer, timeGelephu[sliderValueGelephu.value], source);
+      }, intervalTime);
+    } else {
+      clearInterval(timerGelephu);
+    }
+  }
 
   //环境部分
+  //不丹部分
   const wildfireSwitch = ref(false);
-//   const handleWildfireSwitchChange = (status) => {
-//     const map = mapInstance.value;
-//     const layerName = 'wildfire-layer';
-//     const sourceName = 'wildfire-source';
-//     const tilePath = '/wmts/epsg4326/best/' +
-//     'VIIRS_NOAA20_Thermal_Anomalies_375m_All/default/2024-10-01/500m/' +
-//     '{z}/{y}/{x}.mvt';
-//     // https://gibs.earthdata.nasa.gov/
-//     // MODIS_Terra_Thermal_Anomalies_All
-//     // https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_NOAA20_Thermal_Anomalies_375m_All/default/2020-10-01/500m/4/3/4.mvt
-//     if (status) {
-//         map.addSource(sourceName, {
-//             type: 'raster',
-//             tiles: [
-//                  'https://gibs-c.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?TIME=2021-07-17T00:00:00Z&layer=VIIRS_SNPP_Thermal_Anomalies_375m_Night&tilematrixset=500m&Service=WMTS&Request=GetTile&Version=1.0.0&FORMAT=application%2Fvnd.mapbox-vector-tile&TileMatrix={z}&TileCol={x}&TileRow={y}'
-//                 // 'https://gibs.earthdata.nasa.gov/' + tilePath,
-//                 // `https://gibs-c.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?Service=WMTS&Request=GetTile&Version=1.0.0&layer=MODIS_Terra_Thermal_Anomalies_All&TileMatrix={z}&tilematrixset=500m&TileCol={x}&TileRow={y}&style=default&TIME=2012-07-09&Format=image%2Fpng`
-//                 // 'https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?Service=WMTS&Request=GetTile&Version=1.0.0& TIME=2020-10-01&layer=VIIRS_NOAA20_Thermal_Anomalies_375m_All&tilematrixset=500m&TileMatrix=4&TileCol=4&TileRow=3&FORMAT=application/vnd.mapbox-vector-tile'
-//             ]
-//         });
-//         //vector
-//         // map.addLayer({
-//         //     "id": layerName,
-//         //     "type": "fill",
-//         //     "source": "wildfire-source",
-//         //     "source-layer": layerName,
-//         //     "minzoom": 1,
-//         //     "maxzoom": 12,
-//         //     'layout': {
-//         //         'visibility': 'visible'
-//         //     },
-//         //     "paint": {
-//         //         "fill-color": 'red'
-//         //     }
-//         // });
-//         //raster
-//         map.addLayer({
-//             "id": layerName,
-//             "type": "raster",
-//             "source": sourceName,
-//             "minzoom": 1,
-//             "maxzoom": 12,
-//             "paint": {
-//                 'raster-opacity': 1,
-//             }
-//         })
-//     } else {
-//         if (mapInstance.value.getLayer(layerName)) mapInstance.value.removeLayer(layerName);
-//         if (mapInstance.value.getSource(sourceName)) mapInstance.value.removeSource(sourceName);
-//     }  
-//   }
+  const sliderValueWildfire = ref(0);
+  const isPlayWildfire = ref(false);
+  let timerWildfire = null;
+  const timeWildfire = [
+    '2020-01-01',
+    '2021-01-01',
+    '2022-01-01',
+  ]
+  const sliderMaxWildfire = timeWildfire.length - 1; // 时序slider的间隔数量，和地图文件数量有关
+  const handleVideoPlayWildfire = (source, layer, intervalTime = 1500) => {
+    isPlayWildfire.value = !isPlayWildfire.value;
+
+    if (isPlayWildfire.value) {
+      timerWildfire = setInterval(() => {
+        sliderValueWildfire.value++;
+        if (sliderValueWildfire.value >= timeWildfire.length) {
+            sliderValueWildfire.value = 0;
+        }
+        handleWMSTimeChange(layer, timeWildfire[sliderValueWildfire.value], source);
+      }, intervalTime);
+    } else {
+      clearInterval(timerWildfire);
+    }
+  }
 
 //wms
 const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTime, timer) => {
@@ -418,6 +476,7 @@ const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTim
   }
 
   //海洋部分
+  //悬浮物
   const oceanSwitch1 = ref(false);
   const sliderValueSPHK = ref(0);
   const isPlaySPHK = ref(false);
@@ -443,6 +502,34 @@ const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTim
       }, intervalTime);
     } else {
       clearInterval(timerSPHK);
+    }
+  }
+
+  //悬浮物
+  const chlaSwitch = ref(false);
+  const sliderValueChla = ref(0);
+  const isPlayChla = ref(false);
+  let timerChla = null;
+  const timeChla = [
+    '2018-12-26',
+    '2019-01-25',
+    '2019-04-25',
+    '2019-08-08'
+  ];
+  const sliderMaxChla = timeChla.length - 1; // 和地图文件数量有关
+  const handleVideoPlayChla = (source, layer, intervalTime = 2000) => {
+    isPlayChla.value = !isPlayChla.value;
+
+    if (isPlayChla.value) {
+      timerChla = setInterval(() => {
+        sliderValueChla.value++;
+        if (sliderValueChla.value >= timeChla.length) {
+            sliderValueChla.value = 0;
+        }
+        handleWMSTimeChange(layer, timeChla[sliderValueChla.value], source);
+      }, intervalTime);
+    } else {
+      clearInterval(timerChla);
     }
   }
 
