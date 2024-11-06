@@ -18,7 +18,7 @@
                     <div class="tab-content wt-320">
                         <h4>Carbon Stock</h4>
                         <div class="content-section">
-                            <el-switch v-model="junShanSwitch1" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'junshan-layer', 'junshan-source', timeJunShan[sliderValueJunShan], timerJunShan)" />
+                            <el-switch v-model="junShanSwitch1" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'junshan-layer', 'junshan-source', timeJunShan[sliderValueJunShan], timerJunShan, 112.8, 29.4, 10)" />
                             <span style="font-size: 12px; margin-left: 8px; color: #555">Junshan AGB biomass</span>
                             <p class="description">Monitoring data of wild terrestrial animals on Junshan Island, Yueyang, Hunan。</p>
                             <div class="slider-demo-block">
@@ -30,7 +30,7 @@
 
                             <div style="margin-top: 16px;"></div>
 
-                            <el-switch v-model="gelephuSwitch1" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'gelephu-layer', 'gelephu-source', timeGelephu[sliderValueGelephu], timerGelephu)" />
+                            <el-switch v-model="gelephuSwitch1" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'gelephu-layer', 'gelephu-source', timeGelephu[sliderValueGelephu], timerGelephu, 89.3, 27.3, 7)" />
                             <span style="font-size: 12px; margin-left: 8px; color: #555">Bhutan Gelephu AGB</span>
                             <p class="description">Monitoring data of forest in Gelephu, Bhutan。</p>
                             <div class="slider-demo-block">
@@ -58,7 +58,7 @@
                     <div class="tab-content wt-320">
                         <h4>Wildfire Monitoring</h4>
                         <div class="content-section">
-                            <el-switch v-model="wildfireSwitch" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'wildfire-layer', 'wildfire-source', timeWildfire[sliderValueWildfire], timerWildfire)" />
+                            <el-switch v-model="wildfireSwitch" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'wildfire-layer', 'wildfire-source', timeWildfire[sliderValueWildfire], timerWildfire, 96.5, 28.1, 1)" />
                             <span style="font-size: 12px; margin-left: 8px; color: #555">Global wildfire risk forecast</span>
                             <p class="description">Monitoring wild fire risk in the global。</p>
                             <div class="slider-demo-block">
@@ -80,7 +80,7 @@
                     <div class="tab-content wt-320">
                         <h4>HongKong</h4>
                         <div class="content-section">
-                            <el-switch v-model="oceanSwitch1" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'sphk-layer', 'sphk-source', timeSPHK[sliderValueSPHK], timerSPHK)" />
+                            <el-switch v-model="oceanSwitch1" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'sphk-layer', 'sphk-source', timeSPHK[sliderValueSPHK], timerSPHK, 113.8, 22.3, 9)" />
                             <span style="font-size: 12px; margin-left: 8px; color: #555">Suspended particles in water</span>
                             <p class="description">One of the indicators to measure water pollution.</p>
                             <div class="slider-demo-block">
@@ -92,7 +92,7 @@
                             
                             <div style="margin-top: 16px;"></div>
 
-                            <el-switch v-model="chlaSwitch" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'chla-layer', 'chla-source', timeChla[sliderValueChla], timerChla)" />
+                            <el-switch v-model="chlaSwitch" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'chla-layer', 'chla-source', timeChla[sliderValueChla], timerChla, 113.8, 22.3, 9)" />
                             <span style="font-size: 12px; margin-left: 8px; color: #555">Chla</span>
                             <p class="description">Seawater Chlorophyll near HongKong.</p>
                             <div class="slider-demo-block">
@@ -161,7 +161,7 @@
                         <MultiLineChart v-else :data="chartData" ref="chart" height="300px"/>
                         <h4>Time Series Data</h4>
                         <div class="content-section" style="margin-top: 8px">
-                            <el-switch v-model="windSwitch1" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'wind-layer', 'wind-source', timeWind[sliderValueWind])" />
+                            <el-switch v-model="windSwitch1" size="small" active-color="#13ce66" inactive-color="#ff4949" @change="(e) => handleVisibilitySwitchChange(e, 'wind-layer', 'wind-source', timeWind[sliderValueWind], timerWind, 105.5, 19.2, 5)" />
                             <span style="font-size: 12px; margin-left: 8px; color: #555">Wind Speed</span>
                             <p class="description">Show the wind speed with time series data.</p>
                             <div class="slider-demo-block">
@@ -339,7 +339,7 @@
 
   const setUrl = (time, layerName, server='http://localhost:8080/geoserver/TimeSeries/wms') => {
       let url = `${server}?service=WMS&version=1.1.0&request=GetMap&layers=${layerName}&bbox={bbox-epsg-3857}&width=512&height=512&srs=EPSG:3857&time=${time}&styles=&format=image/png&TRANSPARENT=true`;     
-      console.log(encodeURIComponent(url))    
+      console.log(url);    
       return url;
   }
 
@@ -442,9 +442,14 @@
   }
 
 //wms
-const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTime, timer) => {
+const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTime, timer, lng, lat, zoom) => {
     const map = mapInstance.value;
     if (status) {
+        //定位到位置
+        map.flyTo({
+            center: [lng,lat],
+            zoom: zoom
+        });
         const layerPrefix = layerName.split('-')[0];
         const layer = urlLayers[layerPrefix];
         const tilesUrl = setUrl(selectedTime, layer);
@@ -467,7 +472,7 @@ const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTim
             "paint": {
                 'raster-opacity': 0.8,
             }
-        })
+        });
     } else {
         if (mapInstance.value.getLayer(layerName)) mapInstance.value.removeLayer(layerName);
         if (mapInstance.value.getSource(sourceName)) mapInstance.value.removeSource(sourceName);
