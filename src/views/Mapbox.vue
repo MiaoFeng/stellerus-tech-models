@@ -339,7 +339,7 @@
 
   const setUrl = (time, layerName, server='http://localhost:8080/geoserver/TimeSeries/wms') => {
       let url = `${server}?service=WMS&version=1.1.0&request=GetMap&layers=${layerName}&bbox={bbox-epsg-3857}&width=512&height=512&srs=EPSG:3857&time=${time}&styles=&format=image/png&TRANSPARENT=true`;     
-      console.log(url);    
+      console.log(url);  
       return url;
   }
 
@@ -356,7 +356,9 @@
     'wind': 'TimeSeries:HKSS',
     'junshan': "TimeSeries:JunShanAGB",
     'wildfire': 'TimeSeries:HKSS',
-    'sphk': 'TimeSeries:HKSS'
+    'sphk': 'TimeSeries:HKSS',
+    'gelephu': "TimeSeries:GelephuAGB",
+    'chla': 'TimeSeries:HKChla'
   }
 
   //碳汇部分
@@ -386,15 +388,39 @@
       clearInterval(timerJunShan);
     }
   }
-  //不丹部分
+  //不丹Gelephu部分
   const gelephuSwitch1 = ref(false);
   const sliderValueGelephu = ref(0);
   const isPlayGelephu = ref(false);
   let timerGelephu = null;
   const timeGelephu = [
+    '2019-04-01',
+    '2019-05-01',
+    '2019-06-01',
+    '2019-10-01',
+    '2019-11-01',
     '2020-01-01',
+    '2020-02-01',
+    '2020-04-01',
+    '2020-05-01',
+    '2020-07-01',
+    '2020-08-01',
+    '2020-10-01',
+    '2020-12-01',
     '2021-01-01',
+    '2021-02-01',
+    '2021-03-01',
+    '2021-09-01',
+    '2021-12-01',
     '2022-01-01',
+    '2022-02-01',
+    '2022-05-01',
+    '2022-08-01',
+    '2022-09-01',
+    '2022-10-01',
+    '2022-11-01',
+    '2022-12-01',
+    '2023-01-01'
   ]
   const sliderMaxGelephu = timeGelephu.length - 1; // 时序slider的间隔数量，和地图文件数量有关
   const handleVideoPlayGelephu = (source, layer, intervalTime = 1500) => {
@@ -414,7 +440,7 @@
   }
 
   //环境部分
-  //不丹部分
+  //不丹部分火灾
   const wildfireSwitch = ref(false);
   const sliderValueWildfire = ref(0);
   const isPlayWildfire = ref(false);
@@ -472,7 +498,7 @@ const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTim
             "paint": {
                 'raster-opacity': 0.8,
             }
-        });
+        })
     } else {
         if (mapInstance.value.getLayer(layerName)) mapInstance.value.removeLayer(layerName);
         if (mapInstance.value.getSource(sourceName)) mapInstance.value.removeSource(sourceName);
@@ -481,7 +507,7 @@ const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTim
   }
 
   //海洋部分
-  //悬浮物
+  //悬浮物SS
   const oceanSwitch1 = ref(false);
   const sliderValueSPHK = ref(0);
   const isPlaySPHK = ref(false);
@@ -491,7 +517,29 @@ const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTim
     '2018-12-26',
     '2019-01-25',
     '2019-04-25',
-    '2019-08-08'
+    '2019-08-08',
+    '2019-09-07',
+    '2019-10-02',
+    '2019-11-11',
+    '2019-12-11',
+    '2020-01-30',
+    '2020-04-09',
+    '2020-08-22',
+    '2020-10-11',
+    '2020-11-05',
+    '2020-12-05',
+    '2021-01-14',
+    '2021-02-18',
+    '2021-03-20',
+    '2021-09-06',
+    '2021-10-11',
+    '2021-11-10',
+    '2021-12-10',
+    '2022-01-04',
+    '2022-04-09',
+    '2022-09-06',
+    '2022-10-06',
+    '2022-12-10'
   ];
   const sliderMaxSPHK = timeSPHK.length - 1; // 和地图文件数量有关
   const handleVideoPlaySPHK = (source, layer, intervalTime = 2000) => {
@@ -510,7 +558,7 @@ const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTim
     }
   }
 
-  //悬浮物
+  //Chla
   const chlaSwitch = ref(false);
   const sliderValueChla = ref(0);
   const isPlayChla = ref(false);
@@ -519,7 +567,29 @@ const handleVisibilitySwitchChange = (status, layerName, sourceName, selectedTim
     '2018-12-26',
     '2019-01-25',
     '2019-04-25',
-    '2019-08-08'
+    '2019-08-08',
+    '2019-09-07',
+    '2019-10-02',
+    '2019-11-11',
+    '2019-12-11',
+    '2020-01-30',
+    '2020-04-09',
+    '2020-08-22',
+    '2020-10-11',
+    '2020-11-05',
+    '2020-12-05',
+    '2021-01-14',
+    '2021-02-18',
+    '2021-03-20',
+    '2021-09-06',
+    '2021-10-11',
+    '2021-11-10',
+    '2021-12-10',
+    '2022-01-04',
+    '2022-04-09',
+    '2022-09-06',
+    '2022-10-06',
+    '2022-12-10'
   ];
   const sliderMaxChla = timeChla.length - 1; // 和地图文件数量有关
   const handleVideoPlayChla = (source, layer, intervalTime = 2000) => {
